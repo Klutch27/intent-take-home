@@ -4,25 +4,38 @@ const fruitStyle = {
   display: 'flex',
   flexDirection: 'row',
   fontSize: '16px',
-  justifyContent: 'space-around',
+  justifyContent: 'space-between',
   alignItems: 'center',
-  width: '20%'
+  width: '17rem'
 };
 
 const buttonStyle = {
   borderStyle: 'solid',
-  borderRadius: '3px',
+  borderRadius: '5px',
   borderWidth: '1px',
-  backgroundColor: 'green',
-  color: 'white',
+  borderColor: 'black',
+  backgroundColor: 'rgb(252, 186, 3)',
+  color: 'black',
+  height: '2rem',
+  width: '3.5rem',
+  fontWeight: 'bold'
 };
+
+const buttonDiv = {
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  width: '7.5rem',
+}
 
 function Fruit(props){
   return (
     <div style={fruitStyle}>
       <p>{props.name}: {props.quantity}</p>
-      <button style={buttonStyle} onClick={()=>{props.updateCart('add', props.name);}}>Add</button>
-      <button style={buttonStyle} onClick={()=>{props.updateCart('remove', props.name);}}>Remove</button>
+      <div style={buttonDiv}>
+        <button style={buttonStyle} onClick={()=>{props.updateCart('add', props.name);}}>Add</button>
+        <button style={buttonStyle} onClick={()=>{props.updateCart('remove', props.name);}}>Remove</button>
+      </div>
     </div>
   );
 }
