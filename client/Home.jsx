@@ -75,20 +75,20 @@ sendToServer(){
   const options = {
     method: 'POST',
     body: JSON.stringify(this.state)
-  }
+  };
 
-  fetch('http://localhost:3000/update', options)
+  fetch('http://localhost:3000/update', options);
   const newState = JSON.parse(JSON.stringify(this.state));
   const cart = newState.shoppingCart;
 
   for (let key in cart){
     cart[key] = 0;
   }
-
+  
   this.setState(newState);
+
   }
   
-}
 
 render(){
 
