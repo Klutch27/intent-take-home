@@ -45,6 +45,7 @@ class Home extends Component {
   };
 
   this.updateCart = this.updateCart.bind(this);
+  this.sendToServer = this.sendToServer.bind(this);
 }
 
 /* componentDidMount(){
@@ -55,7 +56,6 @@ class Home extends Component {
 updateCart(string, fruit){
 
   const newState = JSON.parse(JSON.stringify(this.state));
-  console.log('newState', newState);
 
   if (string === 'add'){
     newState.shoppingCart[fruit] += 1;
@@ -70,6 +70,26 @@ updateCart(string, fruit){
 
 }
 
+sendToServer(){
+
+  const options = {
+    method: 'POST',
+    body: JSON.stringify(this.state)
+  }
+
+  fetch('http://localhost:3000/update', options)
+  const newState = JSON.parse(JSON.stringify(this.state));
+  const cart = newState.shoppingCart;
+
+  for (let key in cart){
+    cart[key] = 0;
+  }
+
+  this.setState(newState);
+  }
+  
+}
+
 render(){
 
   return(
@@ -81,7 +101,7 @@ render(){
           <Fruit name='Banana' quantity={this.state.shoppingCart.Banana} updateCart={this.updateCart}/>
           <Fruit name='Cranberry' quantity={this.state.shoppingCart.Cranberry} updateCart={this.updateCart}/>
           <Fruit name='Durian' quantity={this.state.shoppingCart.Durian} updateCart={this.updateCart}/>
-          <AddToCart />
+          <AddToCart sendToServer={this.sendToServer}/>
         </div>
         <div>
           <ShoppingCart />
