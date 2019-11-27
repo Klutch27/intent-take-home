@@ -26,12 +26,12 @@ app.use(express.static(path.join(__dirname, '../build')));
 
 app.get('/home', cartController.checkIfCartExists, (req, res, next)=>{
   console.log('req.session.id', req.session.id);
-  res.status(200).json(req.body.userCache);
+  res.status(200).json(res.locals.userCache);
 });
 
-app.post('/update', (req, res, next)=>{
+app.post('/update', cartController.updateCartTotal, (req, res, next)=>{
   console.log('hi');
-  res.end();
+  res.status(200).json(res.locals.updatedCart);
 });
 
 app.listen(PORT, ()=>{

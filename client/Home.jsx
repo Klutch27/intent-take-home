@@ -87,20 +87,34 @@ checkCart(){
 
 sendToServer(){
 
+  console.log('this.state.shoppingCart', this.state.shoppingCart);
+
   const options = {
     method: 'POST',
-    body: JSON.stringify(this.state.shoppingCart)
+    body: JSON.stringify(this.state.shoppingCart),
+    headers: {
+      'Content-Type': 'application/json'
+    }
   };
 
-  fetch('http://localhost:3000/update', options);
-  const newState = JSON.parse(JSON.stringify(this.state));
-  const cart = newState.shoppingCart;
+  fetch('http://localhost:3000/update', options)
+  .then(res=>res.json())
+  .then(res=>{
+    const newState = JSON.parse(JSON.stringify(this.state));
+    // const cart = newState.shoppingCart;
+    
+    // eslint-disable-next-line guard-for-in
+    for (let key in newState.shoppingCart){
+      newState.shoppingCart[key] = 0;
+    }
 
-  for (let key in cart){
-    cart[key] = 0;
-  }
+    newState.actualCart = res;
+  
+    this.setState(newState);
+  })
+  .catch(err=>console.error(err));
 
-  this.setState(newState);
+
 
   }
   
