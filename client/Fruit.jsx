@@ -26,7 +26,7 @@ const buttonDiv = {
   flexDirection: 'row',
   justifyContent: 'space-between',
   width: '7.5rem',
-}
+};
 
 function Fruit(props){
   return (

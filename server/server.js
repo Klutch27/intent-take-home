@@ -40,6 +40,6 @@ app.listen(PORT, ()=>{
 });
 
 
-// app.use('*', (req, res, next)=>{
-//   res.status(404).json('The page you are looking for does not exist.')
-// });
+app.all('*', (req, res, next)=>{
+  res.status(404).json('The page you are looking for does not exist.');
+});
