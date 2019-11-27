@@ -14,7 +14,7 @@ const buttonStyle = {
 
 function AddToCart(props){
   return (
-    <button style={buttonStyle} onClick={()=>{props.sendToServer()}}>Add Item(s) to Shopping Cart</button>
+    <button style={buttonStyle} onClick={()=>{props.sendToServer();}}>Add Item(s) to Shopping Cart</button>
   );
 }
 

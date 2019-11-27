@@ -41,17 +41,15 @@ class Home extends Component {
         Banana: 0,
         Cranberry: 0,
         Durian: 0
-      }
+      },
+      actualCart: {}
   };
 
   this.updateCart = this.updateCart.bind(this);
   this.sendToServer = this.sendToServer.bind(this);
+  this.checkCart = this.checkCart.bind(this);
 }
 
-/* componentDidMount(){
-  have a function that checks the server for the actual shopping cart.. have the shopping cart Tile display that information.
-}
-*/
 
 updateCart(string, fruit){
 
@@ -70,6 +68,18 @@ updateCart(string, fruit){
 
 }
 
+async checkCart(){
+
+  const result = await fetch('http://localhost:3000/update');
+  const parsed = await result.json();
+  const newState = JSON.parse(JSON.stringify(this.state));
+
+  newState.actualCart = parsed;
+  console.log(newState);
+  this.setState(newState)
+  
+}
+
 sendToServer(){
 
   const options = {
@@ -84,11 +94,15 @@ sendToServer(){
   for (let key in cart){
     cart[key] = 0;
   }
-  
+
   this.setState(newState);
 
   }
   
+componentDidMount(){
+  this.checkCart();
+}
+
 
 render(){
 
@@ -104,7 +118,7 @@ render(){
           <AddToCart sendToServer={this.sendToServer}/>
         </div>
         <div>
-          <ShoppingCart />
+          <ShoppingCart items={this.state.actualCart}/>
         </div>
       </div>
     </div>
