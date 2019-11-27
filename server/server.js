@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 const path = require('path');
-// const cache = require('./cache.js');
 const session = require('express-session');
 const cartController = require('./controllers/cartController.js');
 const uid = require('uid-safe');
@@ -25,13 +24,15 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, '../build')));
 
 app.get('/home', cartController.checkIfCartExists, (req, res, next)=>{
-  console.log('req.session.id', req.session.id);
   res.status(200).json(res.locals.userCache);
 });
 
 app.post('/update', cartController.updateCartTotal, (req, res, next)=>{
-  console.log('hi');
   res.status(200).json(res.locals.updatedCart);
+});
+
+app.patch('/', cartController.clearCache, (req, res, next)=>{
+  res.status(200).json(res.locals.userCache);
 });
 
 app.listen(PORT, ()=>{

@@ -21,6 +21,17 @@ const contentStyle = {
   width: '40rem'
 };
 
+const shoppingCartContent = {
+  display: 'flex', 
+  flexDirection: 'column', 
+  alignItems: 'center',
+  border: 'solid',
+  borderWidth: '2px',
+  borderColor: 'black',
+  backgroundColor: 'white',
+  padding: '1rem'
+};
+
 const fruitContent = {
   display: 'flex', 
   flexDirection: 'column', 
@@ -30,7 +41,7 @@ const fruitContent = {
   borderColor: 'black',
   backgroundColor: 'rgb(255, 171, 176)',
   padding: '1rem'
-}
+};
 
 class Home extends Component {
   constructor(props){
@@ -48,6 +59,7 @@ class Home extends Component {
   this.updateCart = this.updateCart.bind(this);
   this.sendToServer = this.sendToServer.bind(this);
   this.checkCart = this.checkCart.bind(this);
+  this.clearCart = this.clearCart.bind(this);
 }
 
 
@@ -65,6 +77,34 @@ updateCart(string, fruit){
     }
     this.setState(newState);
   }
+
+}
+
+clearCart(){
+
+  const newState = {
+      shoppingCart: {
+        Apple: 0,
+        Banana: 0,
+        Cranberry: 0,
+        Durian: 0
+    },
+     actualCart: {}
+  };
+  
+  const options = {
+    method: 'PATCH',
+    body: JSON.stringify(newState),
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+  fetch('http://localhost:3000/', options)
+  .then(res=>res.json())
+  .then(res=>{
+    newState.actualCart = res;
+    this.setState(newState);
+  });
 
 }
 
@@ -86,8 +126,6 @@ checkCart(){
 }
 
 sendToServer(){
-
-  console.log('this.state.shoppingCart', this.state.shoppingCart);
 
   const options = {
     method: 'POST',
@@ -136,8 +174,8 @@ render(){
           <Fruit name='Durian' quantity={this.state.shoppingCart.Durian} updateCart={this.updateCart}/>
           <AddToCart sendToServer={this.sendToServer}/>
         </div>
-        <div>
-          <ShoppingCart items={this.state.actualCart}/>
+        <div style={shoppingCartContent}>
+          <ShoppingCart items={this.state.actualCart} clearCart={this.clearCart}/>
         </div>
       </div>
     </div>

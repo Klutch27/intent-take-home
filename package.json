@@ -6,16 +6,20 @@
   "scripts": {
     "start": "nodemon server/server.js && webpack-dev-server --open --hot",
     "build": "webpack",
-    "dev": "nodemon server/server.js & webpack-dev-server --open --mode development"
+    "dev": "nodemon server/server.js & webpack-dev-server --open --mode development",
+    "test": "mocha"
   },
   "author": "Gareth Leake",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "babel-loader": "^8.0.6",
+    "chai": "^4.2.0",
     "css-loader": "^3.2.0",
     "express": "^4.17.1",
     "file-loader": "^4.2.0",
+    "mocha": "^6.2.2",
+    "node-mocks-http": "^1.8.0",
     "nodemon": "^1.19.4",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
