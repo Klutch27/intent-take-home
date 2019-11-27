@@ -89,7 +89,7 @@ sendToServer(){
 
   const options = {
     method: 'POST',
-    body: JSON.stringify(this.state)
+    body: JSON.stringify(this.state.shoppingCart)
   };
 
   fetch('http://localhost:3000/update', options);
