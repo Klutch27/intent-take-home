@@ -2,7 +2,6 @@ const chai = require('chai');
 const mocha = require('mocha');
 const assert = chai.assert;
 const calculateTotal = require('../server/controllers/helperFunctions.js');
-const httpMocks = require('node-mocks-http');
 
 
 describe('cartController', function(){

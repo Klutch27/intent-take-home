@@ -23,7 +23,7 @@ checkIfCartExists(req, res, next){
   },
 
 updateCartTotal(req, res, next){
-
+// price list
   const prices = [{
     "id": "A",
     "description": "Apple",
@@ -54,14 +54,14 @@ updateCartTotal(req, res, next){
 
 const currentCartItems = cache[req.session.id];
 
-// eslint-disable-next-line guard-for-in
 
 // add new items to cart
+// eslint-disable-next-line guard-for-in
 for (let key in req.body){
   currentCartItems[key] += req.body[key];
 };
 
-//calculate new total
+//calculate new total, using helper function
 
   currentCartItems['Total'] = calculateTotal(prices, currentCartItems);
   cache[req.session.id] = currentCartItems;
