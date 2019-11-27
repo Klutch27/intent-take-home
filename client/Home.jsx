@@ -68,15 +68,20 @@ updateCart(string, fruit){
 
 }
 
-async checkCart(){
-
-  const result = await fetch('http://localhost:3000/update');
-  const parsed = await result.json();
+checkCart(){
   const newState = JSON.parse(JSON.stringify(this.state));
 
-  newState.actualCart = parsed;
-  console.log(newState);
-  this.setState(newState)
+  fetch('http://localhost:3000/home')
+  .then(res=>{
+    return res.json();
+  })
+  .then(res=>{
+    newState.actualCart = res;
+    return this.setState(newState);
+  })
+  .catch(err=>{
+     return console.log(err);
+  });
   
 }
 

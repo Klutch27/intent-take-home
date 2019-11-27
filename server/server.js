@@ -22,21 +22,23 @@ app.use(session({
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(express.static(path.join(__dirname, '../build')));
 
-express.static(path.join(__dirname, '../build'));
-
-app.get('/', cartController.checkIfCartExists, (req, res, next)=>{
+app.get('/home', cartController.checkIfCartExists, (req, res, next)=>{
   console.log('req.session.id', req.session.id);
   res.status(200).json(req.body.userCache);
 });
 
-// app.post('/update', );
+app.post('/update', (req, res, next)=>{
+  console.log('hi');
+  res.end();
+});
 
 app.listen(PORT, ()=>{
   console.log(`Server listening on PORT ${PORT}`);
 });
 
 
-app.use('*', (req, res, next)=>{
-  res.status(404).json('The page you are looking for does not exist.')
-});
+// app.use('*', (req, res, next)=>{
+//   res.status(404).json('The page you are looking for does not exist.')
+// });
