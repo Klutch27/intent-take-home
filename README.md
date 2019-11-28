@@ -3,7 +3,7 @@
 This application is a mock e-comm site, where users can purchase add and remove fruit from their shopping cart.
 The shopping cart displays the quantity of items, and the final total. The total is calculated based on unit pricing as well as volume discounts, although the specifics of this are hidden from the user. The relevant pricing information used to calculate totals is as follows:
 
-`
+```
 [{
     "id": "A",
     "description": "Apple",
@@ -31,7 +31,7 @@ The shopping cart displays the quantity of items, and the final total. The total
     "unit_price": 0.15,
     "volume_discounts": []
     }];
-`
+```
 
 **Instructions:**
 
