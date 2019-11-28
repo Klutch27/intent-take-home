@@ -22,10 +22,12 @@ To run the application, please do the following:
 
 5. Express was chosen for a backend framework as it allows for semantic, declarative API development and provides easy access to the request-response pipeline. Additionally, the chainable middleware allows for more modular code.
 
-6. The API uses 3 different endpoints, and relies on the request body in POST/PATCH requests to modify the cache. In retrospect, this may not have been what was intended in the original spec. An alternative way to design the API would be to use `req.params` and add each representative `id` as a string which could then be parsed by the server, and a total calculated.
+6. The data structure I used in state as well as in the updateCart() functionality tie to the `description` property of the price data supplied by the spec, rather than the `id` property. In retrospect, I could have tweaked the app state's data structure to focus upon the `id` instead, which would be more in line with the spec.
 
-7. Since no data needed to persist beyond the duration of the user's session, no database was needed. Although to create an ecomm site at scale, I'd consider persisting the user's state in a database so that it was presented to them on future returns. Moreover, a time stamp could be implemented -- if the user had not returned in a certain period, marketing e-mails targeting their stored data (i.e. products they considered purchasing) could be generated.
+7. The API has three endpoints: `/home` (GET), `/` (PATCH), `/update` (POST). In retrospect, I could have streamlined the `/` and `/update` endpoints into a single `/cart` endpoint.
 
-8. Webpack was utilized as a build tool to create minified and uglified code, allowing for better browser performance. It also allows for ES6 import statements (requires babel with webpack).
+8. Since no data needed to persist beyond the duration of the user's session, no database was needed. Although to create an ecomm site at scale, I'd consider persisting the user's state in a database so that it was presented to them on future returns. Moreover, a time stamp could be implemented -- if the user had not returned in a certain period, marketing e-mails targeting their stored data (i.e. products they considered purchasing) could be generated.
 
-9. Mocha and Chai were used for testing. Chai has a simple and straightforward assertion tool to check strict equality (useful for testing the mathematical nature of the helper function). 
+9. Webpack was utilized as a build tool to create minified and uglified code, allowing for better browser performance. It also allows for ES6 import statements (requires babel with webpack).
+
+10. Mocha and Chai were used for testing. Chai has a simple and straightforward assertion tool to check strict equality (useful for testing the mathematical nature of the helper function). 
